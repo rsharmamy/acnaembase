@@ -19,12 +19,15 @@
                    com.day.cq.personalization.UserPropertiesUtil,
                    com.day.cq.wcm.api.WCMMode,
                    java.util.Locale" %><%
-%><%@taglib prefix="personalization" uri="http://www.day.com/taglibs/cq/personalization/1.0" %><%
-
+%>
+<%@taglib prefix="personalization" uri="http://www.day.com/taglibs/cq/personalization/1.0" %>
+<%
     Locale pageLang = currentPage.getLanguage(false);
     final I18n i18n = new I18n(slingRequest.getResourceBundle(pageLang));
     final boolean isAnonymous = UserPropertiesUtil.isAnonymous(slingRequest);
+	pageContext.setAttribute("isAnonymous",isAnonymous);
     final boolean isDisabled = WCMMode.DISABLED.equals(WCMMode.fromRequest(request));
+	pageContext.setAttribute("isDisabled",isDisabled);
 
 	//final String logoutPath = request.getContextPath() + "/system/sling/logout.html";
 	 String logoutPath = WCMUtils.getInheritedProperty(currentPage, resourceResolver, "cq:logoutPage");
@@ -44,7 +47,12 @@
     if (profilePagePath == null) {
         profilePagePath = currentStyle.get("profilePage", "");    // for legacy, pre-5.6.1 sites
     }
-    final String myProfileLink = profilePagePath + ".html";
+	//final String myProfileLink = "${profile.path}.form.html" + profilePagePath;
+	String myProfileLink = profilePagePath;
+
+	if( !myProfileLink.endsWith(".html")) {
+        myProfileLink += ".html";
+    }
 
     String loginPagePath = WCMUtils.getInheritedProperty(currentPage, resourceResolver, "cq:loginPage");
     if (loginPagePath == null) {
@@ -55,72 +63,69 @@
         loginPagePath += ".html";
     }
 %>
-<script type="text/javascript">function logout() {
-    if (_g && _g.shared && _g.shared.ClientSidePersistence) {
-        _g.shared.ClientSidePersistence.clearAllMaps();
-    }
 
-<% if( !isDisabled ) { %>
-    if (CQ_Analytics && CQ_Analytics.CCM) {
-        CQ_Analytics.ProfileDataMgr.loadProfile("anonymous");
-        CQ.shared.Util.reload();
-    }
-<% } else { %>
-    if (CQ_Analytics && CQ_Analytics.CCM) {
-        CQ_Analytics.ProfileDataMgr.clear();
-        CQ_Analytics.CCM.reset();
-    }
+<script type="text/javascript">
 
-<% } %>
+    function logout() {
 
-   CQ.shared.HTTP.clearCookie("<%= CommerceConstants.COMMERCE_COOKIE_NAME %>", "/");
-    CQ.shared.Util.load("<%= xssAPI.encodeForJSString(logoutPath) %>");
-}
-    </script>
+    	if (_g && _g.shared && _g.shared.ClientSidePersistence) {
+        	_g.shared.ClientSidePersistence.clearAllMaps();
+    	}
 
-        <%
-        if (isDisabled) {
+        <c:choose>
+    		<c:when test="${not isDisabled}">
+				 if (CQ_Analytics && CQ_Analytics.CCM) {
+                    CQ_Analytics.ProfileDataMgr.loadProfile("anonymous");
+                    CQ.shared.Util.reload();
+                }
+			</c:when>
+            <c:otherwise>
+				if (CQ_Analytics && CQ_Analytics.CCM) {
+                    CQ_Analytics.ProfileDataMgr.clear();
+                    CQ_Analytics.CCM.reset();
+                }
+			</c:otherwise>
+		</c:choose>
 
-                //in publish mode, only display the name if !anonymous
-                if (!isAnonymous) {
-        %>
-                    <li>
-                        <a href="<%= myProfileLink %>"> <i class="icon-user"></i>Profile</a>
+       CQ.shared.HTTP.clearCookie("<%= CommerceConstants.COMMERCE_COOKIE_NAME %>", "/");
+       CQ.shared.Util.load("<%= xssAPI.encodeForJSString(logoutPath) %>");
+	}
+</script>
+
+
+	<c:choose>
+    	<c:when test="${isDisabled}">
+        	<c:choose>
+            	<c:when test="${not isAnonymous}">
+                	<li>
+                    	<a href="<%= myProfileLink %>"> <i class="icon-user"></i>Profile</a>
                     </li>
                     <li>
-                        <a href="javascript:logout();"> <i class="icon-unlock"></i>LogOut</a>
+                            <a href="javascript:logout();"> <i class="icon-unlock"></i>LogOut</a>
                     </li>
-        <%
-
-        		} else {
-
-         %>
-                    <li>
-                        <a href="<%= loginPagePath %>"> <i class="icon-lock"></i>Login</a>
+              	</c:when>
+    		    <c:otherwise>
+            		<li>
+                    		<a href="<%= loginPagePath %>"> <i class="icon-lock"></i>Login</a>
                     </li>
-		<%
-            	}
-
-        } else {
-
-            //on author handle link from the ContextCloud
-				if (!isAnonymous) {
-        %>
-                    <li>
-                        <a href="<%= myProfileLink %>"> <i class="icon-user"></i>Profile</a>
+                </c:otherwise>
+            </c:choose>
+		</c:when>
+        <c:otherwise>
+        	<c:choose>
+            	<c:when test="${not isAnonymous}">
+                	<li>
+                    	<a href="<%= myProfileLink %>"> <i class="icon-user"></i>Profile</a>
                     </li>
                     <li>
-                        <a href="javascript:logout();"> <i class="icon-unlock"></i>LogOut</a>
+                            <a href="javascript:logout();"> <i class="icon-unlock"></i>LogOut</a>
                     </li>
-        <%
-
-        		} else {
-
-         %>
-                    <li>
-                        <a href="<%= loginPagePath %>"> <i class="icon-lock"></i>Login</a>
+              	</c:when>
+    		    <c:otherwise>
+            		<li>
+                    		<a href="<%= loginPagePath %>"> <i class="icon-lock"></i>Login</a>
                     </li>
-		<%
-            	}
-		}
-        %>
+                </c:otherwise>
+            </c:choose>
+       	</c:otherwise>
+	</c:choose>

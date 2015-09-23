@@ -19,6 +19,11 @@
                             name="./headTitle"
                             validateOnBlur="true"
                             xtype="textfield"/>
+                        <redirectTo
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Redirect To"
+                            name="./redirectTo"
+                            xtype="pathfield"/>
                     </items>
                 </first>
                 <second

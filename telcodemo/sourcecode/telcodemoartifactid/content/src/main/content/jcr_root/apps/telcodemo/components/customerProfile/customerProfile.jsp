@@ -6,6 +6,7 @@
                    com.day.cq.i18n.I18n,
                    com.day.cq.personalization.UserPropertiesUtil,
                    com.day.cq.wcm.api.WCMMode,
+                   com.day.cq.wcm.foundation.forms.FormsHelper,
                    java.util.Locale" %><%
 %><%@taglib prefix="personalization" uri="http://www.day.com/taglibs/cq/personalization/1.0" %>
 <%
@@ -19,9 +20,13 @@
 <%
 
 	String title = properties.get("headTitle",DEFAULT_TITLE);
+	pageContext.setAttribute("title",title);
 
 	final boolean isAnonymous = UserPropertiesUtil.isAnonymous(slingRequest);
+	pageContext.setAttribute("isAnonymous",isAnonymous);
+
     final boolean isDisabled = WCMMode.DISABLED.equals(WCMMode.fromRequest(request));
+	pageContext.setAttribute("isDisabled",isDisabled);
 	//final String logoutPath = request.getContextPath() + "/system/sling/logout.html";
 
 	// managed URIs should respect sling mapping
@@ -37,17 +42,36 @@
         logoutPath += ".html";
         }
 
-	String redirectTo = "/content/telcodemo/en/user.html";
+	//Get Left Value
+	String leftValues[] = properties.get("detail_left",DEFAULT_LEFT_DETAILS);
+	pageContext.setAttribute("leftValues",leftValues);
 
-	if (isAnonymous) {
+    //Get Right Value
+	String rightValues[] = properties.get("detail_right",DEFAULT_RIGHT_DETAILS);
+	pageContext.setAttribute("rightValues",rightValues);
 
-%><script type="text/javascript">
- var url = CQ.shared.HTTP.noCaching("<%= xssAPI.encodeForJSString(redirectTo) %>");
-  CQ.shared.Util.load(url);
-</script>
-<%
+
+    // managed URIs should respect sling mapping
+    String redirectTo = properties.get("./redirectTo", "");
+	if (!StringUtils.isBlank(redirectTo)) {
+        redirectTo = slingRequest.getResourceResolver().map(request, redirectTo);
+    }else {
+        redirectTo = "/content/telcodemo/en.html";
+    }
+
+	if( !redirectTo.endsWith(".html")) {
+        redirectTo += ".html";
     }
 %>
+
+
+<c:if test="${isAnonymous}">
+    <script type="text/javascript">
+         var url = CQ.shared.HTTP.noCaching("<%= xssAPI.encodeForJSString(redirectTo) %>");
+          CQ.shared.Util.load(url);
+    </script>
+</c:if>
+
 
          <div id="content">
             <div class="line">
@@ -55,7 +79,7 @@
 					<thead>
 						<tr>
 						<th>
-							<%=title%>
+                            ${title}
 						</th>
 						</tr>
 					</thead>
@@ -66,61 +90,36 @@
                 <div class="l-6 s-12">
 	<table class="customerProfile">
 		<tbody>
+            <c:forEach items="${leftValues}" var="lValue">
 
-<%
+				<c:set var="val" value="${fn:split(lValue, '=')}" />
 
-    //Get Left Value
-	String leftValues[] = properties.get("detail_left",DEFAULT_LEFT_DETAILS);
-
-	for(String lValue: leftValues){
-
-        if(StringUtils.isEmpty(lValue)){
-			continue;
-        }
-
-        String val[] = lValue.split("=");
-%>
-		<tr>
-			<td><%=val[0]%></td>
-			<td>:</td>
-			<td width="50%">
-            	<div id="userprofile_<%=val[1]%>">-</div>
-          	</td>
-		</tr>
-
-<%
-    }
-%>
+					<tr>
+                        <td>${val[0]}</td>
+                        <td>:</td>
+                        <td width="50%">
+                            <div id="userprofile_${val[1]}">-</div>
+                        </td>
+                    </tr>
+            </c:forEach>
 		</tbody>
 	</table>
 </div>
 <div class="l-6 s-12">
 	<table class="customerProfile">
 		<tbody>
+            <c:forEach items="${rightValues}" var="rValue">
 
-<%
-    //Get Right Value
-	String rightValues[] = properties.get("detail_right",DEFAULT_RIGHT_DETAILS);
+				<c:set var="val" value="${fn:split(rValue, '=')}" />
 
-	for(String rValue: rightValues){
-
-        if(StringUtils.isEmpty(rValue)){
-			continue;
-        }
-
-        String val[] = rValue.split("=");
-%>
-		<tr>
-			<td><%=val[0]%></td>
-			<td>:</td>
-			<td width="50%">
-            	<div id="userprofile_<%=val[1]%>">-</div>
-          	</td>
-		</tr>
-
-<%
-    }
-%>
+					<tr>
+                        <td>${val[0]}</td>
+                        <td>:</td>
+                        <td width="50%">
+                            <div id="userprofile_${val[1]}">-</div>
+                        </td>
+                    </tr>
+            </c:forEach>
 		</tbody>
 	</table>
 </div>

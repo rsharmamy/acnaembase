@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Dialog"
+    helpPath="en/cq/current/wcm/default_components.html#Title"
+    title="Upgrade Demo"
+    xtype="tabpanel">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <main
+            jcr:primaryType="cq:Widget"
+            title="Main"
+            xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <bloktitle
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Main Title"
+                    name="./blokmaintitle"
+                    xtype="textfield"/>
+                <description
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Main Subtitle"
+                    name="./blokmainsubtitle"
+                    xtype="textfield"/>
+            </items>
+            <listeners
+                jcr:primaryType="nt:unstructured"
+                render="function() { this.findParentByType('tabpanel').hideTabStripItem(3); }"/>
+        </main>
+        <grid
+            jcr:primaryType="cq:Widget"
+            title="Grid"
+            xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <enableCircular
+                    jcr:primaryType="cq:Widget"
+                    fieldDescription="Check to enable circular on image"
+                    fieldLabel="Enable Circle"
+                    name="./checkTest"
+                    type="checkbox"
+                    xtype="selection"/>
+                <pages
+                    jcr:primaryType="cq:Widget"
+                    fieldDescription="Choose path for the article"
+                    fieldLabel="Path"
+                    name="./blokpath"
+                    xtype="multifield">
+                    <fieldConfig
+                        jcr:primaryType="cq:Widget"
+                        width="150"
+                        xtype="pathfield"/>
+                </pages>
+            </items>
+        </grid>
+    </items>
+</jcr:root>

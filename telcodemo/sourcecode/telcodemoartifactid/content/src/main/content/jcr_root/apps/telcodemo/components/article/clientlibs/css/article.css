@@ -1,0 +1,13 @@
+.article h1{
+    color: white;
+}
+
+.article{
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 4.5em 0;
+}
+
+.article p {
+    color: #fff;
+}

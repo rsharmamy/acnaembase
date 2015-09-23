@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Dialog"
+    title="Footer"
+    xtype="tabpanel">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <menu
+            jcr:primaryType="cq:Widget"
+            title="Menu"
+            xtype="panel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <pages
+                    jcr:primaryType="cq:Widget"
+                    fieldDescription="Ex: &#xa;Copyright (yyyy), Maxis."
+                    fieldLabel="Note"
+                    name="./footnote"
+                    xtype="textfield"/>
+            </items>
+        </menu>
+    </items>
+</jcr:root>

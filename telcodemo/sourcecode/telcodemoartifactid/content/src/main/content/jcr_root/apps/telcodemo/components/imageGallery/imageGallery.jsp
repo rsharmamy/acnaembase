@@ -1,7 +1,7 @@
 <%--
     
     Image Gallery
-    
+
     --%><%
     %><%@include file="/libs/foundation/global.jsp"%><%
     %><%@page session="false" import=	"com.day.cq.dam.api.Asset,
@@ -10,18 +10,34 @@
                                         com.demos.telcodemo.bean.GalleryImage,
                                         com.demos.telcodemo.component.ImageGallery"
     %><%
+
+    // Default Message
+    String componentName = component.getTitle();
+    pageContext.setAttribute("componentName",componentName);
+
+	String componentPath = component.getPath();
+	Node componentNode = resourceResolver.getResource(componentPath).adaptTo(Node.class);
+	if (componentNode.hasProperty("defaultMessage")) {
+		String defaultMessage = componentNode.getProperty("defaultMessage").getString();
+    	pageContext.setAttribute("defaultMessage",defaultMessage);
+	}
+    else {
+        String defaultMessage = "Author has not configured the component default message yet.";
+    	pageContext.setAttribute("defaultMessage",defaultMessage);
+    };
+
     // Heading and Subheading
     String heading = properties.get("heading","");
     String subheading = properties.get("subheading","");
     pageContext.setAttribute("heading",heading);
     pageContext.setAttribute("subheading",subheading);
-    
+
     // Grid Size
     int colNumber = Integer.parseInt(properties.get("colnumber","3"));
     
     if (colNumber >= 5) {
         colNumber = 5;
-    }
+    };
 
     if (colNumber == 5) {
         String gridSize = "five";
@@ -38,7 +54,7 @@
     
     // Image and Custom Descriptions
     String[] imagePaths = properties.get("images", String[].class);
-    
+
     if (imagePaths == null) {
         boolean success = false;
         pageContext.setAttribute("success",success);
@@ -59,8 +75,8 @@
         <section>
             <div id="content">
                 <div class="line">
-                    <h2>Image Gallery</h2>
-                    <p class="subtitile">Showcase your images here.<b> Right Click\Edit to add images</b></p>
+                    <h2>- ${componentName} -</h2>
+                    <p class="subtitile">${defaultMessage}</p>
                 </div>
             </div>
         </section>
@@ -77,7 +93,7 @@
                                 <img src="${image.imagePath}">
                                 <c:choose>
                                     <c:when test="${image.imageTitle == null}">
-                                        <p class="subtitile border">ERROR: Image path is invalid! Right click\Edit to edit the paths</p>
+                                        <p class="subtitile">ERROR: Image path is invalid! Right click\Edit to edit the paths</p>
                                     </c:when>
                                     <c:otherwise>
                                         <c:choose>

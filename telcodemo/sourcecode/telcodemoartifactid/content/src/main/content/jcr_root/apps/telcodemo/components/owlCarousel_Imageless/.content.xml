@@ -4,4 +4,5 @@
     jcr:primaryType="cq:Component"
     jcr:title="Text Carousel"
     allowedParents="*/parsys"
-    componentGroup="Maxis Next1"/>
+    componentGroup="Maxis Next1"
+    defaultMessage="There have been no entries by author yet."/>

@@ -11,6 +11,22 @@
     							  com.demos.telcodemo.bean.GalleryPage,
     							  com.demos.telcodemo.component.OwlCarousel"
 %><%
+
+    // Default Message
+    String componentName = component.getTitle();
+    pageContext.setAttribute("componentName",componentName);
+
+	String componentPath = component.getPath();
+	Node componentNode = resourceResolver.getResource(componentPath).adaptTo(Node.class);
+	if (componentNode.hasProperty("defaultMessage")) {
+		String defaultMessage = componentNode.getProperty("defaultMessage").getString();
+    	pageContext.setAttribute("defaultMessage",defaultMessage);
+	}
+    else {
+        String defaultMessage = "Author has not configured the component default message yet.";
+    	pageContext.setAttribute("defaultMessage",defaultMessage);
+    };
+
 	// Carousel Settings
 	String slideSpeed = properties.get("slidespeed","800");
 	String autoPlay = properties.get("autoplay",String.class);
@@ -70,8 +86,8 @@
         <section>
             <div id="content">
                <div class="line">
-                   <h2>Image Carousel</h2>
-                   <p class="subtitile">Showcase your pages here.<b> Right Click\Edit to add pages</b></p>
+                   <h2>- ${componentName} -</h2>
+                   <p class="subtitile">${defaultMessage}</p>
                 </div>
             </div>
         </section>

@@ -11,6 +11,22 @@
     							  com.demos.telcodemo.bean.GalleryPage,
     							  com.demos.telcodemo.component.OwlCarousel"
 %><%
+
+    // Default Message
+    String componentName = component.getTitle();
+    pageContext.setAttribute("componentName",componentName);
+
+	String componentPath = component.getPath();
+	Node componentNode = resourceResolver.getResource(componentPath).adaptTo(Node.class);
+	if (componentNode.hasProperty("defaultMessage")) {
+		String defaultMessage = componentNode.getProperty("defaultMessage").getString();
+    	pageContext.setAttribute("defaultMessage",defaultMessage);
+	}
+    else {
+        String defaultMessage = "Author has not configured the component default message yet.";
+    	pageContext.setAttribute("defaultMessage",defaultMessage);
+    };
+
     // Carousel Settings
 	String slideSpeed = properties.get("slidespeed","800");
 	String autoPlay = properties.get("autoplay",String.class);
@@ -69,8 +85,8 @@
         <section>
             <div id="content">
                <div class="line">
-                   <h2>Text Carousel</h2>
-                   <p class="subtitile">Showcase your pages here.<b> Right Click\Edit to add pages</b></p>
+                   <h2>- ${componentName} -</h2>
+                   <p class="subtitile">${defaultMessage}</p>
                 </div>
             </div>
         </section>
@@ -84,7 +100,14 @@
                  <div class="owl-item">
                      <div class="item">
                          <h1>${page.pageTitle}</h1>
-                         <p class="s-12 l-8 center margin-bottom">${page.pageDesc}</p>
+                         <c:choose>
+                             <c:when test="${page.pageDesc == null}">
+                                 <p class="s-12 l-8 center margin-bottom">Right click\Edit to edit pages</p>
+                             </c:when>
+                             <c:otherwise>
+                                 <p class="s-12 l-8 center margin-bottom">${page.pageDesc}</p>
+                             </c:otherwise>
+                         </c:choose>
                      </div>
                      <div>
                          <a class="button s-12 l-4 center" href="${pagePaths[status.index]}.html">${customBtn}</a>

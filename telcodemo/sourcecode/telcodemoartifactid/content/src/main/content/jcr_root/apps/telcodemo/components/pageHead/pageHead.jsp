@@ -8,7 +8,6 @@
 %><%@include file="/libs/foundation/global.jsp"%><%
 %><%@page session="false" %><%
 %><%
-	// TODO add you code here
 
     String headTitle = properties.get("headtitle",properties.get(NameConstants.PN_TITLE, String.class));
     if (headTitle == null || headTitle.equals("")) {
@@ -21,7 +20,7 @@
         headTitle = resourcePage.getName();
     }
 
-pageContext.setAttribute("headTitle",headTitle);
+	pageContext.setAttribute("headTitle",headTitle);
 
 %>
 <section>

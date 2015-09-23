@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2015-09-22T17:15:07.210+08:00"
+        cq:lastModifiedBy="admin"
+        cq:template="/libs/wcm/core/templates/designpage"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Telco Demo"
+        sling:resourceType="wcm/core/components/designer">
+        <page jcr:primaryType="nt:unstructured">
+            <par
+                jcr:lastModified="{Date}2015-09-21T18:00:40.372+08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="foundation/components/parsys"
+                components="[/libs/foundation/components/chart,/libs/foundation/components/image,/libs/foundation/components/list,/libs/foundation/components/table,/libs/foundation/components/text,/libs/foundation/components/textimage,group:Maxis Next1]">
+                <section jcr:primaryType="nt:unstructured"/>
+            </par>
+            <topnav
+                jcr:lastModified="{Date}2015-09-21T17:24:04.455+08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="telcodemo/components/topnav"
+                paths="[/content/telcodemo/en/postpaid,/content/telcodemo/en/broadband,/content/telcodemo/en/devices,/content/telcodemo/en/stores,/content/telcodemo/en/shop]">
+                <userinfo
+                    jcr:lastModified="{Date}2015-09-22T17:15:07.207+08:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="telcodemo/components/userinfo"
+                    loginPage="/content/telcodemo/en/user/login"
+                    logoutPage="/content/telcodemo/en"
+                    profilePage="/content/telcodemo/en/user/profile"/>
+                <logo
+                    jcr:lastModified="{Date}2015-09-21T17:05:50.945+08:00"
+                    jcr:lastModifiedBy="admin"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="telcodemo/components/logo"
+                    myImages="/content/dam/telcodemo/images/logos/maxis.svg"/>
+            </topnav>
+            <mobileLogo
+                jcr:lastModified="{Date}2015-09-21T17:11:17.661+08:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="telcodemo/components/logo"
+                myImages="/content/dam/telcodemo/images/logos/maxis.svg"/>
+        </page>
+    </jcr:content>
+    <images/>
+    <fonts/>
+    <clientlibs/>
+</jcr:root>

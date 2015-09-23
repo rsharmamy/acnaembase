@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Dialog"
+    title="Customer Profile"
+    xtype="dialog">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <tabs jcr:primaryType="cq:TabPanel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <first
+                    jcr:primaryType="nt:unstructured"
+                    title="Head Title"
+                    xtype="panel">
+                    <items jcr:primaryType="cq:WidgetCollection">
+                        <headTitle
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="{Boolean}false"
+                            defaultValue="My Title"
+                            fieldLabel="Head Title"
+                            name="./headTitle"
+                            validateOnBlur="true"
+                            xtype="textfield"/>
+                    </items>
+                </first>
+                <second
+                    jcr:primaryType="nt:unstructured"
+                    title="Profile Details - Left Side"
+                    xtype="panel">
+                    <items jcr:primaryType="cq:WidgetCollection">
+                        <leftContent
+                            jcr:primaryType="cq:Widget"
+                            fieldDescription="Specify {label-name}={property-name} for profile. &lt;br/> {property-name} should same as return by Server side "
+                            fieldLabel="Field Detail"
+                            name="./detail_left"
+                            xtype="multifield">
+                            <fieldConfig
+                                jcr:primaryType="nt:unstructured"
+                                xtype="textfield"/>
+                        </leftContent>
+                    </items>
+                </second>
+                <third
+                    jcr:primaryType="nt:unstructured"
+                    title="Profile Details - Right Side"
+                    xtype="panel">
+                    <items jcr:primaryType="cq:WidgetCollection">
+                        <leftContent
+                            jcr:primaryType="cq:Widget"
+                            fieldDescription="Specify {label-name}={property-name} for profile. &lt;br/> {property-name} should same as return by Server side "
+                            fieldLabel="Field Detail"
+                            name="./detail_right"
+                            xtype="multifield">
+                            <fieldConfig
+                                jcr:primaryType="nt:unstructured"
+                                xtype="textfield"/>
+                        </leftContent>
+                    </items>
+                </third>
+            </items>
+        </tabs>
+    </items>
+    <listeners
+        jcr:primaryType="nt:unstructured"
+        loadcontent="function(dialog) { &#xa;&#x9;var field = dialog.getField('./detail_left'); &#xa;&#x9;if(field.getValue().length &lt; 1){ &#xa;&#x9;&#x9;var values = [&quot;Salution=salution&quot;, &quot;User Name=userName&quot;, &quot;User Id=userId&quot;, &quot;User Id Type=userIdType&quot;, &quot;Race=race&quot;, &quot;Nationality=nationality&quot;, &quot;Mobile Number=mobileNumber&quot;, &quot;Home Number=homeNumber&quot;, &quot;Office Number=officeNumber&quot;, &quot;Email=email&quot;, &quot;Address=address&quot;]; &#xa;&#x9;&#x9;field.setValue(values);&#xa;&#x9;}&#xa;&#x9;&#xa;&#x9;var field_r = dialog.getField('./detail_right'); &#xa;&#x9;if(field_r.getValue().length &lt; 1){ &#xa;&#x9;&#x9;var values = [&quot;User Since=userSince&quot;, &quot;User Type=userType&quot;, &quot;Prefered Contact Method=contactMethod&quot;, &quot;Prefered Contact Time=contactTime&quot;,&quot;Prefered Contact Language=contactLanguage&quot;, &quot;GST Tax Relief=taxRelief&quot;]; &#xa;&#x9;&#x9;field_r.setValue(values);&#xa;&#x9;}&#xa;&#x9;&#xa;&#x9;return true; &#xa;}"/>
+</jcr:root>

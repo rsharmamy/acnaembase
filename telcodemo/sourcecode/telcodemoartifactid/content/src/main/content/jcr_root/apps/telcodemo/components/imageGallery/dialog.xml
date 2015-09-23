@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Dialog"
+    xtype="dialog">
+    <items
+        jcr:primaryType="nt:unstructured"
+        title="Owl Carousel"
+        xtype="tabpanel">
+        <items jcr:primaryType="cq:WidgetCollection">
+            <headingSettings
+                jcr:primaryType="cq:Panel"
+                title="Headings">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <galleryHeading
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Heading"
+                        fieldSubLabel="(optional)"
+                        name="./heading"
+                        xtype="textfield"/>
+                    <gallerySubheading
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Subheading"
+                        fieldSubLabel="(optional)"
+                        name="./subheading"
+                        xtype="textfield"/>
+                </items>
+            </headingSettings>
+            <imageSettings
+                jcr:primaryType="cq:Panel"
+                title="Images">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <columnNumber
+                        jcr:primaryType="cq:Widget"
+                        fieldDescription="Enter integer value from 1 to 5. (Default: 3)"
+                        fieldLabel="Column Number"
+                        name="./colnumber"
+                        xtype="textfield"/>
+                    <images
+                        jcr:primaryType="cq:Widget"
+                        fieldDescription="Click the '+' to add a new image."
+                        fieldLabel="Images"
+                        name="./images"
+                        xtype="multifield">
+                        <fieldConfig
+                            jcr:primaryType="cq:Widget"
+                            xtype="pathfield"/>
+                    </images>
+                    <descriptions
+                        jcr:primaryType="cq:Widget"
+                        fieldDescription="Click the '+' to add a description field. (Default: image metadata) The order of the description is corresponding to the order of added images."
+                        fieldLabel="Custom Descriptions"
+                        name="./descriptions"
+                        xtype="multifield">
+                        <fieldConfig
+                            jcr:primaryType="cq:Widget"
+                            xtype="textfield"/>
+                    </descriptions>
+                </items>
+            </imageSettings>
+        </items>
+    </items>
+</jcr:root>

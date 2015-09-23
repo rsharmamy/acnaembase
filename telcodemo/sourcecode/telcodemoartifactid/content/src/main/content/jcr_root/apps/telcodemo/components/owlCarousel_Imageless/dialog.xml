@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Dialog"
+    xtype="dialog">
+    <items
+        jcr:primaryType="nt:unstructured"
+        title="Owl Carousel (Imageless)"
+        xtype="tabpanel">
+        <items jcr:primaryType="cq:WidgetCollection">
+            <contentSettings
+                jcr:primaryType="cq:Panel"
+                title="Content">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <pages
+                        jcr:primaryType="cq:Widget"
+                        fieldDescription="Click the '+' to add a new page. The component will not work if no page is added."
+                        fieldLabel="Pages"
+                        name="./pages"
+                        xtype="multifield">
+                        <fieldConfig
+                            jcr:primaryType="cq:Widget"
+                            xtype="pathfield"/>
+                    </pages>
+                    <callToAction
+                        jcr:primaryType="cq:Widget"
+                        fieldDescription="(Default: &quot;Read more&quot;)"
+                        fieldLabel="Button Text"
+                        name="./calltoaction"
+                        xtype="textfield"/>
+                </items>
+            </contentSettings>
+            <carouselSettings
+                jcr:primaryType="cq:Panel"
+                title="Carousel Settings">
+                <items jcr:primaryType="cq:WidgetCollection">
+                    <slidespeed
+                        jcr:primaryType="cq:Widget"
+                        fieldDescription="In milliseconds. (If blank, default speed is 800.)"
+                        fieldLabel="Slide Speed"
+                        name="./slidespeed"
+                        xtype="textfield"/>
+                    <autoplay
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Autoplay"
+                        name="./autoplay"
+                        type="checkbox"
+                        xtype="selection"/>
+                    <autoplayspeed
+                        jcr:primaryType="cq:Widget"
+                        fieldDescription="In milliseconds. (If blank, default speed is 5000.)"
+                        fieldLabel="Autoplay Speed"
+                        name="./autoplayspeed"
+                        xtype="textfield"/>
+                    <pagination
+                        jcr:primaryType="cq:Widget"
+                        defaultValue="true"
+                        fieldLabel="Pagination"
+                        name="./pagination"
+                        type="checkbox"
+                        xtype="selection"/>
+                </items>
+            </carouselSettings>
+        </items>
+    </items>
+</jcr:root>

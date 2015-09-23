@@ -1,0 +1,18 @@
+.customerProfile {
+	background:none repeat scroll 0 0 #fff;
+	border:0px solid #D0D0D0;
+	border-collapse:collapse;
+	border-spacing:0;
+	text-align:left;
+	width:100%;
+	}
+.customerProfile tr td, table tr th {padding:0.625em;}
+.customerProfile tfoot, table thead {background:none repeat scroll 0 0 #e0e0e0;}
+.customerProfile tr:nth-of-type(2n) {background:none repeat scroll 0 0 #ffffff;}
+.customerProfile th {border-right:0px solid #fff; text-align: center;}
+.customerProfile td {border-right:0px solid #e0e0e0;}
+.customerProfile td.custprofile-lbl {width:10px;}
+.customerProfile td.custprofile-cln {width:5px;}
+.customerProfile td.custprofile-dt {width:200px;}
+
+.div-withborder { border:2px solid #D0D0D0;}

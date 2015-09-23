@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Dialog"
+    title="Login"
+    xtype="dialog">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <tabs jcr:primaryType="cq:TabPanel">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <first
+                    jcr:primaryType="nt:unstructured"
+                    title="Log In"
+                    xtype="panel">
+                    <items jcr:primaryType="cq:WidgetCollection">
+                        <usernameLabel
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="Username"
+                            fieldLabel="Username Label"
+                            name="./usernameLabel"
+                            xtype="textfield"/>
+                        <usernamePlaceHolder
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="Username"
+                            fieldLabel="Username Place Holder"
+                            name="./usernamePlaceHolder"
+                            xtype="textfield"/>
+                        <passwordLabel
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="Password"
+                            fieldLabel="Password Label"
+                            name="./passwordLabel"
+                            xtype="textfield"/>
+                        <passwordPlaceHolder
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="Password"
+                            fieldLabel="Password Place Holder"
+                            name="./passwordPlaceHolder"
+                            xtype="textfield"/>
+                        <loginLabel
+                            jcr:primaryType="cq:Widget"
+                            defaultValue="Password"
+                            fieldLabel="Log In Button Label"
+                            name="./loginLabel"
+                            xtype="textfield"/>
+                        <redirectTo
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Redirect To"
+                            name="./redirectTo"
+                            xtype="pathfield"/>
+                    </items>
+                </first>
+                <third
+                    jcr:primaryType="nt:unstructured"
+                    title="Content Along Login"
+                    xtype="panel">
+                    <items jcr:primaryType="cq:WidgetCollection">
+                        <menu
+                            jcr:primaryType="cq:Widget"
+                            allowBlank="false"
+                            defaultValue="left"
+                            fieldLabel="Show"
+                            name="./showContent"
+                            type="select"
+                            value="left"
+                            xtype="selection">
+                            <options jcr:primaryType="cq:WidgetCollection">
+                                <left
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Left"
+                                    value="left"/>
+                                <right
+                                    jcr:primaryType="nt:unstructured"
+                                    text="Right"
+                                    value="right"/>
+                                <noShow
+                                    jcr:primaryType="nt:unstructured"
+                                    text="No"
+                                    value="no_show"/>
+                            </options>
+                        </menu>
+                        <promoContent
+                            jcr:primaryType="cq:Widget"
+                            fieldLabel="Promo Content"
+                            name="./promoContent"
+                            xtype="richtext"/>
+                    </items>
+                </third>
+            </items>
+        </tabs>
+    </items>
+</jcr:root>

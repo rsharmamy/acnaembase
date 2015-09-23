@@ -1,0 +1,15 @@
+/*** [w.loon] overwriting for pageHead.jsp ***/
+.pageHead #head_mobile {
+	background: none repeat scroll 0 0 rgba(0, 30, 34, 0.85);
+	padding: 2em 0 2em;
+	text-align: center;
+}
+
+/*** end here ***/
+
+
+.pageHead #head {
+	background: none repeat scroll 0 0 rgba(0, 30, 34, 0.85);
+	padding: 8em 0 2em; /* [w.loon] */
+	text-align: center;
+}

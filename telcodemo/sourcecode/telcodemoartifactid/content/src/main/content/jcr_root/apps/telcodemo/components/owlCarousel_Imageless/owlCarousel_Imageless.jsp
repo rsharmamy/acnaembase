@@ -125,7 +125,8 @@
          $(document).ready(function($) {
            jQuery("#owl-${carousel_ID}").owlCarousel({
 
-               	slideSpeed	: ${slideSpeed},
+               	paginationSpeed	: ${slideSpeed},
+               	rewindSpeed : ${slideSpeed},
                 autoPlay	: ${autoPlay},
                 pagination	: ${pagination},
                 singleItem	: true,
